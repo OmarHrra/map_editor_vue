@@ -1,8 +1,7 @@
 <template>
   <div>
-    <button @click="setTool('pencil')" class="btn btn-primary">Lapiz</button>
-    <button @click="setTool('select')" class="btn btn-info">Seleccionar</button>
-    <button @click="setTool('erase')" class="btn btn-danger">Borrador</button>
+    <toolbar :tools="tools">
+    </toolbar>
 
     <canvas ref="tilesetEditorCanvas"
             @mouseup="mouseUp"
@@ -28,21 +27,27 @@
 
 <script>
 import canvas from '@/mixins/canvas'
+import Toolbar from '@/components/Toolbar'
 
 export default {
   name: 'TilesetEditor',
+    components: {
+    Toolbar
+  },
   mixins: [
     canvas
   ],
   data () {
     return {
-      map: []
+      map: [],
+      tools: [
+        'pencil',
+        'select',
+        'erase'
+      ]
     }
   },
   methods: {
-    setTool (tool) {
-      this.currentTool = tool
-    },
     pencil () {
       let rawImage = this.$store.state.rawImage
       this.ctx.clearRect(this.x1, this.y1, this.tileSize, this.tileSize)
@@ -74,6 +79,16 @@ export default {
       this.map[this.mouse.posX][this.mouse.posY] = null
     }
   },
+  computed: {
+    selectedTool () {
+      return this.$store.state.selectedTool
+    }
+  },
+  watch: {
+    selectedTool (value) {
+      this.currentTool = value
+    },
+  },
   mounted () {
     for (let i = 0; i < this.sizeX; i++) {
       this.map.push([])
@@ -87,7 +102,7 @@ export default {
 
     this.currentTool = 'pencil'
     this.image.src = this.ctx.canvas.toDataURL('image/jpg')
-  }
+  },
 }
 </script>
 

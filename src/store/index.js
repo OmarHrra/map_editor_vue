@@ -21,7 +21,8 @@ export default new Vuex.Store({
         posX: 0,
         posY: 0
       }
-    }
+    },
+    selectedTool: ''
   },
   getters: {
     tilesetMakerParams (state) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     tilesetEditor (state) {
       return state.tilesetEditor
+    },
+    selectedTool (state) {
+      return state.selectedTool
     }
   },
   mutations: {
@@ -49,6 +53,9 @@ export default new Vuex.Store({
     },
     setTilesetEditorMouse (state, payload) {
       state.tilesetEditor.mouse = payload
+    },
+    setSelectedTool (state, payload) {
+      state.selectedTool = payload
     }
   },
   actions: {
