@@ -9,6 +9,9 @@
             <raw-image ref="raw-image"></raw-image>
           </div>
         </div>
+        <div class="col-6" style="background: #e66f51; padding:0;">
+          <tileset-editor></tileset-editor>
+        </div>
       </div>
     </div>
   </div>
@@ -16,11 +19,13 @@
 
 <script>
 import RawImage from '@/components/TilesetMaker/RawImage'
+import TilesetEditor from '@/components/TilesetMaker/TilesetEditor'
 
 export default {
   name: 'TilesetMaker',
   components: {
     RawImage,
+    TilesetEditor
   },
   methods: {
     clickFileInput () {
@@ -30,5 +35,10 @@ export default {
       this.$refs['raw-image'].changeImageSource(e)
     }
   },
+  computed: {
+    tilesetMakerParams () {
+      return this.$store.state.tilesetMakerParams
+    }
+  }
 }
 </script>
