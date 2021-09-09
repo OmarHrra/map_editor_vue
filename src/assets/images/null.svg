@@ -1,9 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-	<defs>
-		<image width="16" height="16" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAAXNSR0IB2cksfwAAAAZQTFRF////zc3NVzTBYwAAABBJREFUeJxjYPjPgBXhEAYAfr8P8ZGkFAAAAAAASUVORK5CYII="/>
-	</defs>
-	<style>
-		tspan { white-space:pre }
-	</style>
-	<use id="Background" href="#img1" x="0" y="0" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 16 16" shape-rendering="crispEdges" width="16" height="16">
+<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
+<path stroke="#ffffff" d="M0 0h8M0 1h8M0 2h8M0 3h8M0 4h8M0 5h8M0 6h8M0 7h8M8 8h8M8 9h8M8 10h8M8 11h8M8 12h8M8 13h8M8 14h8M8 15h8" />
+<path stroke="#cdcdcd" d="M8 0h8M8 1h8M8 2h8M8 3h8M8 4h8M8 5h8M8 6h8M8 7h8M0 8h8M0 9h8M0 10h8M0 11h8M0 12h8M0 13h8M0 14h8M0 15h8" />
 </svg>
