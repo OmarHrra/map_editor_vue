@@ -1,4 +1,16 @@
 export default {
+  props: {
+    sizeX: {
+      type: Number,
+      default: 15,
+      required: false
+    },
+    sizeY: {
+      type: Number,
+      default: 32,
+      required: false
+    },
+  },
   data () {
     return {
       image: new Image,
@@ -13,8 +25,6 @@ export default {
       },
       ctx: null,
       scale: 1,
-      sizeX: 15,
-      sizeY: 32,
       tileSize: 16,
       currentTool: null
     }
@@ -77,7 +87,13 @@ export default {
       this.ctx.strokeStyle = 'red'
       this.ctx.rect(this.x1, this.y1, this.x2, this.y2)
       this.ctx.stroke()
-    }
+    },
+    updateCanvasSize () {
+      this.ctx.canvas.width = this.sizeX*this.tileSize*this.scale
+      this.ctx.canvas.height = this.sizeY*this.tileSize*this.scale
+      this.ctx.imageSmoothingEnabled = false
+      this.ctx.scale(this.scale, this.scale)
+    },
   },
   computed: {
     x1 () {

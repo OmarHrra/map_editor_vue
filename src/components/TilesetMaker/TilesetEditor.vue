@@ -1,8 +1,5 @@
 <template>
   <div>
-    <toolbar :tools="tools">
-    </toolbar>
-
     <canvas ref="tilesetEditorCanvas"
             @mouseup="mouseUp"
             @mousedown="mouseDown"
@@ -27,24 +24,15 @@
 
 <script>
 import canvas from '@/mixins/canvas'
-import Toolbar from '@/components/Toolbar'
 
 export default {
   name: 'TilesetEditor',
-    components: {
-    Toolbar
-  },
   mixins: [
     canvas
   ],
   data () {
     return {
       map: [],
-      tools: [
-        'pencil',
-        'select',
-        'erase'
-      ]
     }
   },
   methods: {
@@ -65,9 +53,6 @@ export default {
       this.map[this.mouse.posX][this.mouse.posY] = {
         x: this.mouse.posX,
         y: this.mouse.posX,
-        properties: {
-          frames: []
-        }
       }
     },
     select () {
@@ -76,7 +61,7 @@ export default {
     },
     erase () {
       this.ctx.clearRect(this.x1, this.y1, this.tileSize, this.tileSize)
-      this.map[this.mouse.posX][this.mouse.posY] = null
+      this.map[this.mouse.posX].splice(this.mouse.posY, 1);
     }
   },
   computed: {
@@ -95,10 +80,7 @@ export default {
     }
     // Context
     this.ctx = this.getContext2D('tilesetEditorCanvas')
-    this.ctx.canvas.width = this.sizeX*this.tileSize*this.scale
-    this.ctx.canvas.height = this.sizeY*this.tileSize*this.scale
-    this.ctx.scale(this.scale, this.scale)
-    this.ctx.imageSmoothingEnabled = false
+    this.updateCanvasSize()
 
     this.currentTool = 'pencil'
     this.image.src = this.ctx.canvas.toDataURL('image/jpg')

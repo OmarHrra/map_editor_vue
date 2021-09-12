@@ -1,11 +1,10 @@
 <template>
   <div>
-    <a @click="setTool">
+    <a>
       <img :src="getImageUrl()"
            :alt="alt"
            :width="width" 
            :height="height"
-           :class="actived"
       >
     </a>
   </div>
@@ -15,25 +14,10 @@
 import button from '@/mixins/button'
 
 export default {
-  name: 'Tool',
+  name: 'CommonButton',
   mixins: [
     button
   ],
-  methods: {
-    setTool () {
-      this.$store.commit('setSelectedTool', this.toolName);
-    }
-  },
-  computed: {
-    selectedTool () {
-      return this.$store.state.selectedTool
-    },
-    actived () {
-      if (this.selectedTool === this.toolName) return 'active-button'
-
-      return ''
-    }
-  }
 }
 </script>
 

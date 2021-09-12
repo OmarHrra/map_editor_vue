@@ -22,12 +22,12 @@ export default {
     changeImageSource (e) {
       this.image.src = URL.createObjectURL(e.target.files[0])
       this.image.onload = () => {
-        this.updateCanvasSize()
+        this.updateCanvasToImageSize()
         this.ctx.drawImage(this.image, 0, 0)
         this.$store.commit('setRawImageImage', this.image)
       }
     },
-    updateCanvasSize () {
+    updateCanvasToImageSize () {
       this.ctx.canvas.width = this.image.width*this.scale
       this.ctx.canvas.height = this.image.height*this.scale
       this.ctx.imageSmoothingEnabled = false
@@ -48,10 +48,7 @@ export default {
   },
   mounted () {
     this.ctx = this.getContext2D('rawImageCanvas')
-    this.ctx.canvas.width = this.sizeX*this.tileSize*this.scale
-    this.ctx.canvas.height = this.sizeY*this.tileSize*this.scale
-    this.ctx.imageSmoothingEnabled = false
-    this.ctx.scale(this.scale, this.scale)
+    this.updateCanvasSize()
 
     this.currentTool = 'select'
     this.image.src = this.ctx.canvas.toDataURL('image/jpg')
