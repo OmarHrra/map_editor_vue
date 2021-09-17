@@ -64,7 +64,7 @@ export default {
       // Clear canvas
       this.ctx.clearRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
       // Draw previous image
-      this.ctx.drawImage(this.image,0,0,this.image.width,this.image.height)
+      this.ctx.drawImage(this.image,0,0,this.ctx.canvas.width/this.scale,this.ctx.canvas.height/this.scale)
 
       // Tool work
       if (this.mouse.isClicked) {
