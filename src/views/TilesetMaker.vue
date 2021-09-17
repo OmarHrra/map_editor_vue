@@ -11,8 +11,18 @@
           <input @change="changeImageSource" type="file" ref="uploadRawImage" style="display: none">
         </div>
         <div class="col-6 left-border">
-          <toolbar :tools="tools">
-          </toolbar>
+          <div class="d-inline float-left">
+            <toolbar :tools="tools">
+            </toolbar>
+          </div>
+
+          <div class="d-inline float-right">
+            <common-button @click.native="saveTileset"
+                           toolName="save_tileset"
+                           alt="save_tileset"
+            >
+            </common-button>
+          </div>
         </div>
       </div>
 
@@ -27,7 +37,7 @@
           </div>
         </div>
         <div class="col-6 left-border no-padding" style="background: #e66f51;">
-          <tileset-editor></tileset-editor>
+          <tileset-editor ref="tileset-editor"></tileset-editor>
         </div>
       </div>
     </div>
@@ -63,6 +73,9 @@ export default {
     },
     changeImageSource (e) {
       this.$refs['raw-image'].changeImageSource(e)
+    },
+    saveTileset () {
+      this.$refs['tileset-editor'].saveTileset()
     }
   },
   computed: {

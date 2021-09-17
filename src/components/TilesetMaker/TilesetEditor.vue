@@ -10,14 +10,14 @@
 
     <div class=" mt-3">
       Current Tool: {{currentTool}} <br>
-      <div v-if="map.length > 0">
+      <div v-if="tileset['map'].length > 0">
       Tile selected: [X:{{tileSelected.posX}}, Y:{{tileSelected.posY}}]<br>
       Mouse position: [X:{{mouse.posX}}, Y:{{mouse.posY}}]<br>
-      Tile selected: {{map[tileSelected.posX][tileSelected.posY]}}
+      Tile selected: {{tileset['map'][tileSelected.posX][tileSelected.posY]}}
       </div>
       <hr>
-      Map Properties: <br>
-      {{map}}
+      Tileset Properties: <br>
+      {{tileset['map']}}
     </div>
   </div>
 </template>
@@ -32,7 +32,10 @@ export default {
   ],
   data () {
     return {
-      map: [],
+      tileset: {
+        image: '',
+        map: [],
+      },
     }
   },
   methods: {
@@ -50,7 +53,7 @@ export default {
         this.x2,
         this.y2,
       )
-      this.map[this.mouse.posX][this.mouse.posY] = {
+      this.tileset['map'][this.mouse.posX][this.mouse.posY] = {
         x: this.mouse.posX,
         y: this.mouse.posX,
       }
@@ -61,7 +64,21 @@ export default {
     },
     erase () {
       this.ctx.clearRect(this.x1, this.y1, this.tileSize, this.tileSize)
-      this.map[this.mouse.posX].splice(this.mouse.posY, 1);
+      this.tileset['map'][this.mouse.posX].splice(this.mouse.posY, 1);
+    },
+    saveTileset () {
+      this.tileset['image'] = this.image.src
+
+      let text = JSON.stringify(this.tileset)
+      let filename = 'tileset.json'
+      let element = document.createElement('a')
+      element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text))
+      element.setAttribute('download', filename)
+      element.style.display = 'none'
+      document.body.appendChild(element)
+
+      element.click();
+      document.body.removeChild(element);
     }
   },
   computed: {
@@ -76,7 +93,7 @@ export default {
   },
   mounted () {
     for (let i = 0; i < this.sizeX; i++) {
-      this.map.push([])
+      this.tileset['map'].push([])
     }
     // Context
     this.ctx = this.getContext2D('tilesetEditorCanvas')
