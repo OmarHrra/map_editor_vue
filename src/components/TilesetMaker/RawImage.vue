@@ -20,6 +20,8 @@ export default {
   ],
   methods: {
     changeImageSource (e) {
+      if (e.target.files.length == 0) return false
+
       this.image.src = URL.createObjectURL(e.target.files[0])
       this.image.onload = () => {
         this.updateCanvasToImageSize()
