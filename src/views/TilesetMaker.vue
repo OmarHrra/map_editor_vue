@@ -73,9 +73,14 @@ export default {
     },
     changeImageSource (e) {
       this.$refs['raw-image'].changeImageSource(e)
+      this.enableCanvas()
     },
     saveTileset () {
       this.$refs['tileset-editor'].saveTileset()
+    },
+    enableCanvas() {
+      this.$refs['raw-image'].enableCanvas()
+      this.$refs['tileset-editor'].enableCanvas()
     }
   },
   computed: {

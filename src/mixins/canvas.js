@@ -26,7 +26,8 @@ export default {
       ctx: null,
       scale: 1,
       tileSize: 16,
-      currentTool: null
+      currentTool: null,
+      disabled: true,
     }
   },
   methods: {
@@ -47,9 +48,9 @@ export default {
       this.mouse.isClicked = false
     },
     toolHandler (posX, posY) {
-      if (posX >= this.ctx.canvas.width || posY >= this.ctx.canvas.height || posX < 0 || posY < 0) {
-        return false
-      }
+      if (this.disabled) return false
+      // Out of bounds
+      if (this.isOutOfBounds(posX, posY)) return false
 
       let x = Math.trunc(posX/(this.tileSize*this.scale))
       let y = Math.trunc(posY/(this.tileSize*this.scale))
@@ -94,6 +95,15 @@ export default {
       this.ctx.imageSmoothingEnabled = false
       this.ctx.scale(this.scale, this.scale)
     },
+    isOutOfBounds (posX, posY) {
+      return posX >= this.ctx.canvas.width || posY >= this.ctx.canvas.height || posX < 0 || posY < 0
+    },
+    enableCanvas () {
+      this.disabled = false
+    },
+    disableCanvas () {
+      this.disabled = true
+    }
   },
   computed: {
     x1 () {
