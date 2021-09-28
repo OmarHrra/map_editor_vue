@@ -29,6 +29,7 @@ export default {
       return this.$store.state.selectedTool
     },
     actived () {
+      if (this.selectedTool == '' && this.toolName == 'pencil') return 'active-button'
       if (this.selectedTool === this.toolName) return 'active-button'
 
       return ''
