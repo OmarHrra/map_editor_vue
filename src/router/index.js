@@ -14,16 +14,16 @@ Vue.use(VueRouter)
     name: 'TilesetMaker',
     component: () => import('@/views/TilesetMaker.vue')
   },
-  {
-    path: '/editor',
-    name: 'Editor',
-    component: () => import('@/views/Editor.vue')
-  },
-  {
-    path: '/settings',
-    name: 'Settings',
-    component: () => import('@/views/Settings.vue')
-  }
+  // {
+  //   path: '/editor',
+  //   name: 'Editor',
+  //   component: () => import('@/views/Editor.vue')
+  // },
+  // {
+  //   path: '/settings',
+  //   name: 'Settings',
+  //   component: () => import('@/views/Settings.vue')
+  // }
 ]
 
 const router = new VueRouter({
